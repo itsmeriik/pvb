@@ -1,4 +1,4 @@
---// Roblox Optimizer with Toggle UI
+--// Roblox Optimizer with Toggle UI (Fixed)
 -- Jalankan via executor
 
 local Players = game:GetService("Players")
@@ -48,24 +48,40 @@ RunService.Heartbeat:Connect(function()
     end
 end)
 
---// UI
-local ScreenGui = Instance.new("ScreenGui", lp.PlayerGui)
-local Frame = Instance.new("Frame", ScreenGui)
-local ToggleBtn = Instance.new("TextButton", Frame)
+--// UI Buatan
+local CoreGui = game:GetService("CoreGui")
+local ScreenGui = Instance.new("ScreenGui")
+ScreenGui.Name = "OptimizerUI"
+ScreenGui.Parent = CoreGui
+ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
-ScreenGui.ResetOnSpawn = false
-
+local Frame = Instance.new("Frame")
 Frame.Size = UDim2.new(0,200,0,100)
-Frame.Position = UDim2.new(0.5,-100,0.1,0)
-Frame.BackgroundColor3 = Color3.fromRGB(30,30,30)
+Frame.Position = UDim2.new(0.5,-100,0.2,0)
+Frame.BackgroundColor3 = Color3.fromRGB(25,25,25)
+Frame.BorderSizePixel = 0
 Frame.Active = true
 Frame.Draggable = true
+Frame.Parent = ScreenGui
 
-ToggleBtn.Size = UDim2.new(1, -20, 0, 50)
+local Title = Instance.new("TextLabel")
+Title.Size = UDim2.new(1,0,0,30)
+Title.BackgroundTransparency = 1
+Title.Text = "🌿 Optimizer"
+Title.TextColor3 = Color3.new(1,1,1)
+Title.Font = Enum.Font.SourceSansBold
+Title.TextSize = 18
+Title.Parent = Frame
+
+local ToggleBtn = Instance.new("TextButton")
+ToggleBtn.Size = UDim2.new(1,-20,0,50)
 ToggleBtn.Position = UDim2.new(0,10,0.5,-25)
-ToggleBtn.BackgroundColor3 = Color3.fromRGB(60,60,60)
+ToggleBtn.BackgroundColor3 = Color3.fromRGB(170,0,0)
 ToggleBtn.TextColor3 = Color3.new(1,1,1)
+ToggleBtn.Font = Enum.Font.SourceSansBold
+ToggleBtn.TextSize = 16
 ToggleBtn.Text = "Optimization: OFF"
+ToggleBtn.Parent = Frame
 
 ToggleBtn.MouseButton1Click:Connect(function()
     optimizeEnabled = not optimizeEnabled
